@@ -9,7 +9,7 @@ class RequestRandom implements _chain.Packer {
     
     constructor (
         public signingValue: u64 = 0,
-        public contract: Name = RNG_CONTRACT
+        public contract: Name = Name.RNG_CONTRACT,
     ) {
         
     }

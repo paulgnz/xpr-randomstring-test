@@ -6,7 +6,7 @@ import { rngChecksumToU64 } from "proton-tsc/rng";
 class RequestRandom extends ActionData {
     constructor (
         public signingValue: u64 = 0,
-        public contract: Name = Name.fromString(RNG_CONTRACT)
+        public contract: Name = Name.RNG_CONTRACT,
     ) {
         super();
     }
@@ -33,7 +33,7 @@ export class RandomString extends Contract {
     @action("receive")
     receive(randomChecksum: Checksum256): void {
         // Authenticate
-        check(Name.fromString(RNG_CONTRACT).value !== 0, "Invalid RNG contract");
+        check(RNG_CONTRACT.value !== 0, "Invalid RNG contract");
 
         // Convert checksum to random index and get string
         const randomIndex = <i32>rngChecksumToU64(randomChecksum, this.strings.length);
