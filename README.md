@@ -1,0 +1,1 @@
+try to make random string with smart contract
