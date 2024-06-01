@@ -11,12 +11,8 @@ async function main() {
     const contract = blockchain.createContract('randomstring', 'target/randomstring.contract');
     await wait(0);
 
-    // Call the getrandom action to request a random number
+    // Call the getrandom action to request a random number and print the random string
     await contract.actions.getrandom(['useraccount']).send('randomstring@active');
-
-    // Simulate the RNG contract sending a random checksum back
-    const randomChecksum = new Uint8Array(32); // Mock random checksum for demonstration
-    await contract.actions.receive([randomChecksum]).send('randomstring@active');
 }
 
 main();
