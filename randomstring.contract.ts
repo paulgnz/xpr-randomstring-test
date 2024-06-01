@@ -1,18 +1,24 @@
-import { Contract, print, Name, ActionData, currentTime } from "proton-tsc";
+import { Name, print, Contract, Checksum256, requireAuth } from 'proton-tsc';
+import { sendRequestRandom, rngChecksumToU64, RNG_CONTRACT } from 'proton-tsc/rng';
+
 
 @contract
-export class RandomString extends Contract {
-    private strings: string[] = ["Hello", "World", "Proton", "Blockchain", "Smart", "Contract"];
+class randomstring extends Contract {
 
-    @action("getrandom")
-    getrandom(account: Name): void {
-        // Generate a unique signing value using currentTime
-        const signingValue: u64 = currentTime();
-        print(`Signing value generated: ${signingValue}`);
-        
-        // Use signing value to determine the random string
-        const randomIndex = <i32>(signingValue % this.strings.length);
-        const randomString = this.strings[randomIndex];
-        print(randomString);
+    @action("say")
+    say(
+        text: string
+    ): void {
+        print("Hello, World!");
     }
+
+    @action("receiverand")
+    receiverand(
+        requestId: u64,
+        randomChecksum: Checksum256,
+    ) : void {
+        //requireAuth(RNG_CONTRACT);
+        const randomU64 = rngChecksumToU64(randomChecksum, 100);
+    }
+
 }

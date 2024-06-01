@@ -2,12 +2,26 @@
   "version": "eosio::abi/1.2",
   "structs": [
     {
-      "name": "getrandom",
+      "name": "receiverand",
       "base": "",
       "fields": [
         {
-          "name": "account",
-          "type": "name"
+          "name": "requestId",
+          "type": "uint64"
+        },
+        {
+          "name": "randomChecksum",
+          "type": "checksum256"
+        }
+      ]
+    },
+    {
+      "name": "say",
+      "base": "",
+      "fields": [
+        {
+          "name": "text",
+          "type": "string"
         }
       ]
     }
@@ -15,8 +29,13 @@
   "types": [],
   "actions": [
     {
-      "name": "getrandom",
-      "type": "getrandom",
+      "name": "receiverand",
+      "type": "receiverand",
+      "ricardian_contract": ""
+    },
+    {
+      "name": "say",
+      "type": "say",
       "ricardian_contract": ""
     }
   ],
